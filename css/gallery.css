@@ -1,1 +1,761 @@
-/* V3.1 */
+/* ==========================================================
+   PROJECT AURORA
+   Gallery.css
+   Sprint V3
+========================================================== */
+
+:root{
+
+    --bg:#0F1115;
+    --bg2:#171A20;
+
+    --text:#F5F5F5;
+    --text2:#B9BEC7;
+
+    --gold:#C68A3A;
+
+    --radius:20px;
+
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.portfolio-hero{
+
+    position:relative;
+
+    width:100%;
+    height:70vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    background-image:url("../assets/hero/hero1.JPG");
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+.portfolio-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+
+        rgba(0,0,0,.25),
+
+        rgba(15,17,21,.90)
+
+    );
+
+}
+
+.portfolio-hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+    max-width:900px;
+
+    padding:20px;
+
+}
+
+.small-title{
+
+    display:block;
+
+    margin-bottom:20px;
+
+    letter-spacing:4px;
+
+    color:var(--gold);
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+}
+
+.portfolio-hero h1{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:6rem;
+
+    margin-bottom:25px;
+
+    color:white;
+
+}
+
+.portfolio-hero p{
+
+    color:var(--text2);
+
+    font-size:1.15rem;
+
+    line-height:2;
+
+}
+
+/* ==========================================================
+   INTRO
+========================================================== */
+
+.portfolio-intro{
+
+    width:100%;
+
+    padding:100px 8%;
+
+    background:var(--bg);
+
+}
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+.container h2{
+
+    font-size:3rem;
+
+    font-family:"Cormorant Garamond",serif;
+
+    margin-bottom:25px;
+
+}
+
+.container p{
+
+    color:var(--text2);
+
+    line-height:2;
+
+    max-width:850px;
+
+}
+
+/* ==========================================================
+   COLLECTIONS
+========================================================== */
+
+.collections{
+
+    padding:60px 8% 120px;
+
+}
+
+.collection-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(auto-fit,minmax(360px,1fr));
+
+    gap:35px;
+
+}
+
+.collection-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:var(--radius);
+
+    text-decoration:none;
+
+    height:480px;
+
+    background:#111;
+
+}
+.collection-card img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+
+        transform .7s ease,
+        filter .7s ease;
+
+}
+
+.collection-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:40px;
+
+    background:linear-gradient(
+
+        rgba(0,0,0,0),
+
+        rgba(0,0,0,.25),
+
+        rgba(0,0,0,.85)
+
+    );
+
+    transition:.5s;
+
+}
+
+.collection-overlay span{
+
+    color:var(--gold);
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+    font-size:.75rem;
+
+    margin-bottom:12px;
+
+}
+
+.collection-overlay h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+    color:white;
+
+    font-size:2.7rem;
+
+    margin-bottom:15px;
+
+}
+
+.collection-overlay p{
+
+    color:#D8D8D8;
+
+    line-height:1.8;
+
+    max-width:320px;
+
+}
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.collection-card:hover img{
+
+    transform:scale(1.08);
+
+    filter:brightness(.72);
+
+}
+
+.collection-card:hover{
+
+    transform:translateY(-10px);
+
+    transition:.45s;
+
+    box-shadow:
+
+        0 25px 70px rgba(0,0,0,.45);
+
+}
+
+.collection-card:hover .collection-overlay{
+
+    background:linear-gradient(
+
+        rgba(0,0,0,.05),
+
+        rgba(0,0,0,.30),
+
+        rgba(0,0,0,.92)
+
+    );
+
+}
+
+.collection-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:0;
+
+    height:4px;
+
+    background:var(--gold);
+
+    transition:.45s;
+
+}
+
+.collection-card:hover::after{
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   FEATURED DESTINATIONS
+========================================================== */
+
+.featured-destinations{
+
+    padding:120px 8%;
+
+    background:#13161C;
+
+}
+
+.destination-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(auto-fit,minmax(240px,1fr));
+
+    gap:30px;
+
+    margin-top:60px;
+
+}
+
+.destination{
+
+    background:#1B1F26;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    transition:.35s;
+
+}
+
+.destination h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:2rem;
+
+    margin-bottom:12px;
+
+}
+
+.destination span{
+
+    color:var(--text2);
+
+    line-height:1.8;
+
+}
+
+.destination:hover{
+
+    transform:translateY(-8px);
+
+    background:#20252D;
+
+}
+
+/* ==========================================================
+   QUOTE
+========================================================== */
+
+.portfolio-quote{
+
+    padding:140px 8%;
+
+    text-align:center;
+
+}
+
+.quote-container{
+
+    max-width:900px;
+
+    margin:auto;
+
+}
+
+blockquote{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:3rem;
+
+    line-height:1.5;
+
+    color:white;
+
+}
+
+.quote-container span{
+
+    display:block;
+
+    margin-top:35px;
+
+    color:var(--gold);
+
+    letter-spacing:2px;
+
+}
+/* ==========================================================
+   PHOTOGRAPHY PHILOSOPHY
+========================================================== */
+
+.photography-philosophy{
+
+    padding:140px 8%;
+
+    background:var(--bg);
+
+}
+
+.narrow{
+
+    max-width:850px;
+
+    margin:auto;
+
+}
+
+.section-label{
+
+    display:inline-block;
+
+    color:var(--gold);
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+    margin-bottom:20px;
+
+}
+
+.photography-philosophy h2{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:3.5rem;
+
+    margin-bottom:35px;
+
+    color:white;
+
+}
+
+.photography-philosophy p{
+
+    color:var(--text2);
+
+    line-height:2;
+
+    margin-bottom:25px;
+
+}
+
+/* ==========================================================
+   STATS
+========================================================== */
+
+.stats-section{
+
+    padding:120px 8%;
+
+    background:#15191F;
+
+}
+
+.stats-grid{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:40px;
+
+}
+
+.stat{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    border-radius:20px;
+
+    background:#1B2027;
+
+    transition:.35s;
+
+}
+
+.stat:hover{
+
+    transform:translateY(-10px);
+
+    background:#232932;
+
+}
+
+.stat h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:4rem;
+
+    color:var(--gold);
+
+    margin-bottom:15px;
+
+}
+
+.stat p{
+
+    color:var(--text2);
+
+    line-height:1.8;
+
+}
+
+/* ==========================================================
+   CTA
+========================================================== */
+
+.portfolio-cta{
+
+    padding:140px 8%;
+
+    text-align:center;
+
+}
+
+.cta-container{
+
+    max-width:850px;
+
+    margin:auto;
+
+}
+
+.cta-container h2{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:3.5rem;
+
+    margin-bottom:25px;
+
+}
+
+.cta-container p{
+
+    color:var(--text2);
+
+    line-height:2;
+
+    margin-bottom:45px;
+
+}
+
+.cta-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.button{
+
+    padding:16px 34px;
+
+    border:1px solid var(--gold);
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:40px;
+
+    transition:.35s;
+
+}
+
+.button:hover{
+
+    background:var(--gold);
+
+    color:black;
+
+}
+
+.button.secondary{
+
+    border-color:#666;
+
+}
+
+.button.secondary:hover{
+
+    background:#2A3039;
+
+    color:white;
+
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+footer{
+
+    background:#0B0D11;
+
+    padding:70px 8%;
+
+}
+
+.footer-content{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    text-align:center;
+
+}
+
+.footer-logo{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:2.4rem;
+
+    margin-bottom:10px;
+
+}
+
+.footer-text{
+
+    color:var(--gold);
+
+    letter-spacing:2px;
+
+    margin-bottom:20px;
+
+}
+
+.footer-copy{
+
+    color:#888;
+
+    font-size:.9rem;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:900px){
+
+    .portfolio-hero{
+
+        height:60vh;
+
+    }
+
+    .portfolio-hero h1{
+
+        font-size:3.8rem;
+
+    }
+
+    .collection-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .collection-card{
+
+        height:340px;
+
+    }
+
+    .destination-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    blockquote{
+
+        font-size:2rem;
+
+    }
+
+    .photography-philosophy h2,
+    .cta-container h2{
+
+        font-size:2.6rem;
+
+    }
+
+}
