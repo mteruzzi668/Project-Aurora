@@ -1,0 +1,1 @@
+Copy hero1.jpg into assets/hero/ then open index.html

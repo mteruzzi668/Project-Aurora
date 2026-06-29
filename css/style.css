@@ -1,0 +1,26 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0F1115;color:#F2F2F2;font-family:Inter,sans-serif}
+header{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 6%;transition:.35s;background:transparent;z-index:99}
+header.scrolled{background:rgba(15,17,21,.9);backdrop-filter:blur(12px)}
+.logo{font:700 2rem "Cormorant Garamond",serif}
+nav a{color:#fff;text-decoration:none;margin-left:30px}
+.hero{height:100vh;position:relative;background:url("../assets/hero/hero1.jpg") center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center}
+.overlay{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.2),rgba(15,17,21,.85))}
+.hero-content{position:relative;max-width:700px;padding:20px;animation:fade 1.2s}
+h1{font:700 5rem "Cormorant Garamond",serif}
+h2{font-weight:300;color:#A5ADB5;margin:10px 0 30px}
+p{line-height:1.8}
+.button{display:inline-block;margin-top:35px;padding:14px 28px;border:1px solid #C68A3A;color:#fff;text-decoration:none}
+.scroll{position:absolute;bottom:30px;font-size:2rem;animation:bounce 2s infinite}
+.section{padding:100px 8%}
+.section h3,.about h3{font:700 2.4rem "Cormorant Garamond",serif;margin-bottom:35px}
+.grid{display:grid;gap:25px}
+.three{grid-template-columns:repeat(3,1fr)}
+.four{grid-template-columns:repeat(4,1fr)}
+.tile{background:#171A20;height:280px;border-radius:18px;display:flex;align-items:end;padding:25px;font-size:1.4rem;transition:.3s}
+.tile:hover{transform:translateY(-6px)}
+.about{padding:100px 8%;max-width:900px}
+footer{text-align:center;padding:60px;color:#A5ADB5}
+@keyframes fade{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+@keyframes bounce{50%{transform:translateY(8px)}}
+@media(max-width:900px){.three,.four{grid-template-columns:1fr}h1{font-size:3.3rem}nav{display:none}}
