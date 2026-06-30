@@ -22,27 +22,29 @@
    HERO
 ========================================================== */
 
-.portfolio-hero{
+.galleryHero{
 
     position:relative;
 
-    width:100%;
-    height:70vh;
+    height:55vh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
 
     overflow:hidden;
 
-    background-image:url("../assets/hero/hero1.JPG");
-
-    background-size:cover;
-    background-position:center;
-
 }
 
-.portfolio-overlay{
+.galleryHeroOverlay{
 
     position:absolute;
 
@@ -50,15 +52,49 @@
 
     background:linear-gradient(
 
-        rgba(0,0,0,.25),
+        rgba(0,0,0,.35),
 
-        rgba(15,17,21,.90)
+        rgba(15,17,21,.85)
 
     );
 
 }
 
-.portfolio-hero-content{
+.galleryHeroContent{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+    max-width:900px;
+
+    padding:20px;
+
+}
+
+.galleryHeroContent h1{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:5rem;
+
+    margin-bottom:20px;
+
+}
+
+.galleryHeroContent p{
+
+    color:#d0d0d0;
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+}
+
+.galleryHeroContent{
 
     position:relative;
 

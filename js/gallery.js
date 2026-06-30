@@ -87,28 +87,37 @@ HEADER
 
 function buildHeader(category,totalPhotos){
 
-    const title=document.getElementById("galleryTitle");
+    const info = galleryInfo[category];
 
-    const description=document.getElementById("galleryDescription");
+    const title = document.getElementById("galleryTitle");
 
-    const names={
+    const description = document.getElementById("galleryDescription");
 
-        landscape:"Landscapes",
-        wildlife:"Wildlife",
-        travel:"Travel",
-        macro:"Macro",
-        astro:"Astrophotography"
+    const hero = document.querySelector(".galleryHero");
 
-    };
+    if(info){
 
-    title.textContent=names[category] || "Gallery";
+        title.textContent = info.title;
 
-    description.textContent=
+        description.textContent =
+            info.description +
+            " • " +
+            totalPhotos +
+            " photograph" +
+            (totalPhotos===1 ? "" : "s");
 
-        totalPhotos +
-        " photograph" +
-        (totalPhotos===1 ? "" : "s") +
-        " in this collection.";
+        hero.style.backgroundImage =
+            `url("${info.hero}")`;
+
+    }
+
+    else{
+
+        title.textContent = "Gallery";
+
+        description.textContent = "";
+
+    }
 
 }
 

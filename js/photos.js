@@ -2,6 +2,59 @@
 PROJECT AURORA
 Photo Database
 ==========================================================*/
+const galleryInfo = {
+
+    landscape:{
+
+        title:"Landscapes",
+
+        description:"Mountains, glaciers, waterfalls and volcanic landscapes.",
+
+        hero:"assets/portfolio/landscape/cover.jpg"
+
+    },
+
+    wildlife:{
+
+        title:"Wildlife",
+
+        description:"Animals photographed in their natural environment.",
+
+        hero:"assets/portfolio/wildlife/cover.jpg"
+
+    },
+
+    travel:{
+
+        title:"Travel",
+
+        description:"Journeys, roads and unforgettable places.",
+
+        hero:"assets/portfolio/travel/cover.jpg"
+
+    },
+
+    macro:{
+
+        title:"Macro",
+
+        description:"Textures and details invisible at first glance.",
+
+        hero:"assets/portfolio/macro/cover.jpg"
+
+    },
+
+    astro:{
+
+        title:"Astrophotography",
+
+        description:"The night sky and the universe above us.",
+
+        hero:"assets/portfolio/astro/cover.jpg"
+
+    }
+
+};
 
 const photos = [
 
