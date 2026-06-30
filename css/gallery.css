@@ -124,28 +124,6 @@
 
 }
 
-.portfolio-hero h1{
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:6rem;
-
-    margin-bottom:25px;
-
-    color:white;
-
-}
-
-.portfolio-hero p{
-
-    color:var(--text2);
-
-    font-size:1.15rem;
-
-    line-height:2;
-
-}
-
 /* ==========================================================
    INTRO
 ========================================================== */
@@ -1001,5 +979,67 @@ LIGHTBOX
 .lightboxInfo p{
 
     color:#bdbdbd;
+
+}
+
+/*==========================================================
+GALLERY HERO
+==========================================================*/
+
+.breadcrumb{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:30px;
+
+    font-size:.95rem;
+
+    color:#cfcfcf;
+
+}
+
+.breadcrumb a{
+
+    color:#cfcfcf;
+
+    text-decoration:none;
+
+}
+
+.breadcrumb a:hover{
+
+    color:#C68A3A;
+
+}
+
+.galleryLabel{
+
+    display:block;
+
+    letter-spacing:6px;
+
+    color:#C68A3A;
+
+    margin-bottom:18px;
+
+    font-size:.9rem;
+
+}
+
+.galleryHeroContent h1{
+
+    margin-bottom:18px;
+
+}
+
+.galleryHeroContent{
+
+    animation:fade 1s;
 
 }

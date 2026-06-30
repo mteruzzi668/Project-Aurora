@@ -95,9 +95,13 @@ function buildHeader(category,totalPhotos){
 
     const hero = document.querySelector(".galleryHero");
 
+const breadcrumb =
+    document.getElementById("breadcrumbCategory");
+
     if(info){
 
         title.textContent = info.title;
+	breadcrumb.textContent = info.title;
 
         description.textContent =
             info.description +
