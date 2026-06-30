@@ -759,3 +759,211 @@ footer{
     }
 
 }
+/*==========================================================
+PHOTO GRID
+==========================================================*/
+
+.galleryContainer{
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:80px 5%;
+
+}
+
+.photoGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+
+    gap:24px;
+
+}
+
+.photoCard{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    aspect-ratio:4/3;
+
+    background:#1b1b1b;
+
+}
+
+.photoCard img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.45s;
+
+}
+
+.photoCard:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.photoOverlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:24px;
+
+    background:linear-gradient(transparent,rgba(0,0,0,.85));
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.photoCard:hover .photoOverlay{
+
+    opacity:1;
+
+}
+
+.photoOverlay h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:2rem;
+
+    margin-bottom:6px;
+
+}
+
+.photoOverlay span{
+
+    color:#d0d0d0;
+
+}
+/*==========================================================
+LIGHTBOX
+==========================================================*/
+
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.95);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.lightbox img{
+
+    max-width:90%;
+
+    max-height:82vh;
+
+    border-radius:10px;
+
+}
+
+#closeLightbox{
+
+    position:absolute;
+
+    top:25px;
+
+    right:35px;
+
+    font-size:45px;
+
+    cursor:pointer;
+
+}
+
+.lightboxArrow{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:50px;
+
+    cursor:pointer;
+
+}
+
+#prevPhoto{
+
+    left:35px;
+
+}
+
+#nextPhoto{
+
+    right:35px;
+
+}
+
+.lightboxInfo{
+
+    position:absolute;
+
+    bottom:30px;
+
+    text-align:center;
+
+}
+
+.lightboxInfo h2{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:2rem;
+
+}
+
+.lightboxInfo p{
+
+    color:#bdbdbd;
+
+}
