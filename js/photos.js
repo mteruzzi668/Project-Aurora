@@ -58,222 +58,91 @@ const galleryInfo = {
 
 const photos = [
 
-    /* ==========================================
-       LANDSCAPES
-    ========================================== */
+/* ==========================================
+   ICELAND
+========================================== */
 
-    {
+{
+    id:1,
 
-        id:1,
+    title:"Fagradalsfjall",
 
-        title:"Kirkjufell",
+    location:"Iceland",
 
-        location:"Iceland",
+    category:"landscape",
 
-        category:"landscape",
+    image:"photo/travel/iceland/fagradalsfjall.jpg",
 
-        image:"photo/iceland/kirkjufell.jpg",
+    camera:"Canon EOS R7",
 
-        camera:"Canon EOS R7",
+    lens:"Canon RF 100-500L"
 
-        lens:"Canon RF 100-500L"
+},
 
-    },
+{
+    id:2,
 
-    {
+    title:"Fjallsárlón",
 
-        id:2,
+    location:"Iceland",
 
-        title:"Skógafoss",
+    category:"landscape",
 
-        location:"Iceland",
+    image:"photo/travel/iceland/fjallsarlon.jpg",
 
-        category:"landscape",
+    camera:"Canon EOS R7",
 
-        image:"photo/iceland/skogafoss.jpg",
+    lens:"Canon RF 100-500L"
 
-        camera:"Canon EOS R7",
+},
 
-        lens:"Canon RF 100-500L"
+{
+    id:3,
 
-    },
+    title:"Stuðlagil",
 
-    {
+    location:"Iceland",
 
-        id:3,
+    category:"landscape",
 
-        title:"Diamond Beach",
+    image:"photo/travel/iceland/studlagil.jpg",
 
-        location:"Iceland",
+    camera:"Canon EOS R7",
 
-        category:"landscape",
+    lens:"Canon RF 100-500L"
 
-        image:"photo/iceland/diamond-beach.jpg",
+},
 
-        camera:"Canon EOS R7",
+{
+    id:4,
 
-        lens:"Canon RF 100-500L"
+    title:"Krafla",
 
-    },
+    location:"Iceland",
 
-    /* ==========================================
-       WILDLIFE
-    ========================================== */
+    category:"landscape",
 
-    {
+    image:"photo/travel/iceland/krafla.jpg",
 
-        id:101,
+    camera:"Canon EOS R7",
 
-        title:"Atlantic Puffin",
+    lens:"Canon RF 100-500L"
 
-        location:"Iceland",
+},
 
-        category:"wildlife",
+{
+    id:5,
 
-        image:"photo/wildlife/puffin.jpg",
+    title:"Whale Watching",
 
-        camera:"Canon EOS R7",
+    location:"Iceland",
 
-        lens:"Canon RF 100-500L"
+    category:"wildlife",
 
-    },
+    image:"photo/travel/iceland/whale.jpg",
 
-    {
+    camera:"Canon EOS R7",
 
-        id:102,
+    lens:"Canon RF 100-500L"
 
-        title:"Seal",
-
-        location:"Iceland",
-
-        category:"wildlife",
-
-        image:"photo/wildlife/seal.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Canon RF 100-500L"
-
-    },
-
-    {
-
-        id:103,
-
-        title:"Arctic Fox",
-
-        location:"Iceland",
-
-        category:"wildlife",
-
-        image:"photo/wildlife/arctic-fox.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Canon RF 100-500L"
-
-    },
-
-    /* ==========================================
-       TRAVEL
-    ========================================== */
-
-    {
-
-        id:201,
-
-        title:"Road Trip",
-
-        location:"Iceland",
-
-        category:"travel",
-
-        image:"photo/travel/roadtrip.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Sigma 16-300"
-
-    },
-
-    {
-
-        id:202,
-
-        title:"Camper Life",
-
-        location:"Iceland",
-
-        category:"travel",
-
-        image:"photo/travel/camper.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Sigma 16-300"
-
-    },
-
-    /* ==========================================
-       MACRO
-    ========================================== */
-
-    {
-
-        id:301,
-
-        title:"Basalt Texture",
-
-        location:"Iceland",
-
-        category:"macro",
-
-        image:"photo/macro/basalt.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Canon RF 100-500L"
-
-    },
-
-    {
-
-        id:302,
-
-        title:"Ice Details",
-
-        location:"Iceland",
-
-        category:"macro",
-
-        image:"photo/macro/ice.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Canon RF 100-500L"
-
-    },
-
-    /* ==========================================
-       ASTRO
-    ========================================== */
-
-    {
-
-        id:401,
-
-        title:"Milky Way",
-
-        location:"Future",
-
-        category:"astro",
-
-        image:"photo/astro/milky-way.jpg",
-
-        camera:"Canon EOS R7",
-
-        lens:"Future Telescope"
-
-    }
-
-];
+}
