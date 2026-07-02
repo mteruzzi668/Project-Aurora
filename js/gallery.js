@@ -223,12 +223,25 @@ function updateLightbox(){
 
     document.getElementById("photoTitle").textContent = photo.title;
 
-    document.getElementById("photoLocation").textContent =
-        photo.location +
-        " • " +
-        photo.camera +
-        " • " +
-        photo.lens;
+    document.getElementById("photoLocation").innerHTML = `
+
+    📍 ${photo.location}<br><br>
+
+    📷 ${photo.camera}<br>
+
+    🔍 ${photo.lens}<br><br>
+
+    ${photo.focalLength}
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    ${photo.aperture}
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    ${photo.shutter}
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    ISO ${photo.iso}<br><br>
+
+    📅 ${photo.date}
+
+`;
 
 }
 
