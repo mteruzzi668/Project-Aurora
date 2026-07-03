@@ -5,6 +5,8 @@ Gallery.js
 
 let photos = [];
 
+let privateMode = false;
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* Se siamo nella pagina Portfolio */
@@ -22,6 +24,27 @@ document.addEventListener("DOMContentLoaded", () => {
         loadGallery();
 
     }
+    
+    const privateButton =
+    document.getElementById("privateMode");
+
+if(privateButton){
+
+    privateButton.addEventListener("click",()=>{
+
+        const password = prompt("Private password");
+
+        if(password === "Aurora"){
+
+            privateMode = true;
+
+            loadGallery();
+
+        }
+
+    });
+
+}
 
 });
 
@@ -87,7 +110,10 @@ async function loadGallery(){
     const category = params.get("category");
 
     const filteredPhotos =
-        photos.filter(photo => photo.category === category);
+    photos.filter(photo =>
+        photo.category === category &&
+        (!photo.private || privateMode)
+    );
 
     buildHeader(category, filteredPhotos.length);
 
@@ -204,7 +230,10 @@ let currentIndex = 0;
 
 function openLightbox(photo){
 
-    currentGallery = photos.filter(p => p.category === photo.category);
+    currentGallery = photos.filter(p =>
+    p.category === photo.category &&
+    (!p.private || privateMode)
+    );
 
     currentIndex = currentGallery.findIndex(p => p.id === photo.id);
 

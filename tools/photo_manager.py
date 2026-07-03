@@ -27,6 +27,7 @@ VALID_EXTENSIONS = {
 def create_title(filename):
 
     name = filename.stem
+    name = name.replace("_private", "")
 
     name = name.replace("-", " ")
 
@@ -106,6 +107,7 @@ for file in PHOTO_DIR.rglob("*"):
     category, subcategory = category_from_path(
         file.relative_to(PHOTO_DIR)
     )
+    is_private = "_private" in file.stem.lower()
 
     exif = get_exif(file)
 
@@ -149,6 +151,8 @@ for file in PHOTO_DIR.rglob("*"):
         "category": category,
 
         "subcategory": subcategory,
+
+        "private": is_private,
 
         "camera": format_camera(exif),
 

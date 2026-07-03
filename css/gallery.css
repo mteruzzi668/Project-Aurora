@@ -1136,3 +1136,30 @@ PHOTO INFO PANEL
     line-height:1.5;
 
 }
+
+#privateMode {
+
+    background:none;
+
+    border:1px solid #C68A3A;
+
+    color:#C68A3A;
+
+    border-radius:50%;
+
+    width:36px;
+
+    height:36px;
+
+    cursor:pointer;
+
+}
+
+
+#privateMode:hover {
+
+    background:#C68A3A;
+
+    color:black;
+
+}
