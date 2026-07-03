@@ -100,41 +100,31 @@ HEADER
 
 function buildHeader(category,totalPhotos){
 
-    const info = galleryInfo[category];
+    const title =
+        document.getElementById("galleryTitle");
 
-    const title = document.getElementById("galleryTitle");
+    const description =
+        document.getElementById("galleryDescription");
 
-    const description = document.getElementById("galleryDescription");
+    const breadcrumb =
+        document.getElementById("breadcrumbCategory");
 
-    const hero = document.querySelector(".galleryHero");
 
-const breadcrumb =
-    document.getElementById("breadcrumbCategory");
+    const name =
+        category.charAt(0).toUpperCase()
+        +
+        category.slice(1);
 
-    if(info){
 
-        title.textContent = info.title;
-	breadcrumb.textContent = info.title;
+    title.textContent = name;
 
-        description.textContent =
-            info.description +
-            " • " +
-            totalPhotos +
-            " photograph" +
-            (totalPhotos===1 ? "" : "s");
+    breadcrumb.textContent = name;
 
-        hero.style.backgroundImage =
-            `url("${info.hero}")`;
 
-    }
-
-    else{
-
-        title.textContent = "Gallery";
-
-        description.textContent = "";
-
-    }
+    description.textContent =
+        totalPhotos +
+        " photograph" +
+        (totalPhotos===1 ? "" : "s");
 
 }
 
@@ -187,7 +177,7 @@ function buildGallery(list){
 
                 <h3>${photo.title}</h3>
 
-                <span>${photo.location}</span>
+                <span>${photo.subcategory}</span>
 
             </div>
 
@@ -238,7 +228,7 @@ function updateLightbox(){
 
     document.getElementById("photoLocation").innerHTML = `
 
-    📍 ${photo.location}<br><br>
+    📍 ${photo.subcategory}}<br><br>
 
     📷 ${photo.camera}<br>
 
