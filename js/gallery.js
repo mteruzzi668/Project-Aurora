@@ -3,6 +3,8 @@ PROJECT AURORA
 Gallery.js
 ==========================================================*/
 
+let photos = [];
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* Se siamo nella pagina Portfolio */
@@ -68,19 +70,25 @@ function getCategory(card){
 GALLERY
 ==========================================================*/
 
-function loadGallery(){
+async function loadGallery(){
 
-    const params=new URLSearchParams(window.location.search);
+    const response = await fetch("data/database.json");
 
-    const category=params.get("category");
+    photos = await response.json();
 
-    const filteredPhotos=photos.filter(photo=>photo.category===category);
+    const params = new URLSearchParams(window.location.search);
 
-    buildHeader(category,filteredPhotos.length);
+    const category = params.get("category");
+
+    const filteredPhotos =
+        photos.filter(photo => photo.category === category);
+
+    buildHeader(category, filteredPhotos.length);
 
     buildGallery(filteredPhotos);
 
 }
+
 /*==========================================================
 HEADER
 ==========================================================*/
@@ -166,7 +174,7 @@ function buildGallery(list){
         card.innerHTML=`
 
             <img
-                src="${photo.image}"
+                src="${photo.path}"
                 alt="${photo.title}"
                 loading="lazy">
 
@@ -217,7 +225,7 @@ function updateLightbox(){
 
     const photo = currentGallery[currentIndex];
 
-    document.getElementById("lightboxImage").src = photo.image;
+    document.getElementById("lightboxImage").src = photo.path;
 
     document.getElementById("lightboxImage").alt = photo.title;
 
