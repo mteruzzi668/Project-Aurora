@@ -1044,53 +1044,54 @@ GALLERY HERO
 
 }
 
-#infoButton{
+.info-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 20;
 
-position:absolute;
-right:40px;
-bottom:40px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
 
-background:rgba(0,0,0,.6);
-color:white;
+    background: rgba(0,0,0,0.55);
+    color: white;
 
-border:1px solid white;
-border-radius:30px;
+    border: 1px solid rgba(255,255,255,0.5);
+    cursor: pointer;
 
-padding:12px 22px;
+    font-size: 18px;
+}
 
-font-size:16px;
+.info-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
 
-cursor:pointer;
+    height: 100%;
+    width: 260px;
 
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+
+    color: white;
+
+    padding: 70px 20px 20px;
+
+    text-align: left;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+
+    z-index: 15;
+}
+
+.info-panel.active {
+    transform: translateX(0);
 }
 
 
-#photoInfoPanel{
-
-position:absolute;
-
-right:40px;
-bottom:100px;
-
-background:rgba(0,0,0,.75);
-
-backdrop-filter:blur(10px);
-
-color:white;
-
-padding:25px;
-
-border-radius:20px;
-
-max-width:350px;
-
-line-height:1.8;
-
-}
-
-
-.hidden{
-
-display:none;
-
+.info-panel p {
+    margin: 8px 0;
+    text-align: left;
 }
