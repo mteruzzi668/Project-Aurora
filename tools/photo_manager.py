@@ -1,10 +1,79 @@
 from pathlib import Path
 import json
 import subprocess
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from exif_reader import get_exif
 from formatter import *
 from lens_database import get_lens
+
+# ==========================================================
+# WATERMARK
+# ==========================================================
+
+def add_watermark(img):
+
+    watermark = "© Marco Teruzzi"
+
+    img = img.convert("RGBA")
+
+    layer = Image.new(
+        "RGBA",
+        img.size,
+        (255,255,255,0)
+    )
+
+    draw = ImageDraw.Draw(layer)
+
+
+    # grandezza proporzionale alla foto
+    font_size = int(img.size[0] * 0.025)
+
+    try:
+        font = ImageFont.truetype(
+            "arial.ttf",
+            font_size
+        )
+    except:
+        font = ImageFont.load_default()
+
+
+    bbox = draw.textbbox(
+        (0,0),
+        watermark,
+        font=font
+    )
+
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+
+
+    margin = int(img.size[0] * 0.03)
+
+
+    position = (
+        img.size[0] - text_width - margin,
+        img.size[1] - text_height - margin
+    )
+
+
+    draw.text(
+        position,
+        watermark,
+        font=font,
+        fill=(255,255,255,120)
+    )
+
+
+    combined = Image.alpha_composite(
+        img,
+        layer
+    )
+
+    return combined.convert("RGB")
+
+# ==========================================================
+# START
+# ==========================================================
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -80,6 +149,8 @@ def create_web_image(file):
     img.thumbnail(
         (2048, 2048)
     )
+    
+    img = add_watermark(img)
 
     img.save(
         output,

@@ -904,11 +904,14 @@ LIGHTBOX
 
 .lightbox img{
 
-    max-width:90%;
+    max-width:92vw;
 
-    max-height:82vh;
+    max-height:88vh;
 
-    border-radius:10px;
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
 
 }
 
