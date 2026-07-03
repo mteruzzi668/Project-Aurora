@@ -72,22 +72,15 @@ GALLERY
 
 async function loadGallery(){
 
-    const response = await fetch("data/database.json");
+    console.log("Loading database...");
+
+    const response = await fetch("./data/database.json");
+
+    console.log(response);
 
     photos = await response.json();
 
-    const params = new URLSearchParams(window.location.search);
-
-    const category = params.get("category");
-
-    const filteredPhotos =
-        photos.filter(photo => photo.category === category);
-
-    buildHeader(category, filteredPhotos.length);
-
-    buildGallery(filteredPhotos);
-
-}
+    console.log(photos);
 
 /*==========================================================
 HEADER
