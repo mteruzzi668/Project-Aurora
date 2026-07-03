@@ -1043,3 +1043,54 @@ GALLERY HERO
     animation:fade 1s;
 
 }
+
+#infoButton{
+
+position:absolute;
+right:40px;
+bottom:40px;
+
+background:rgba(0,0,0,.6);
+color:white;
+
+border:1px solid white;
+border-radius:30px;
+
+padding:12px 22px;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+
+#photoInfoPanel{
+
+position:absolute;
+
+right:40px;
+bottom:100px;
+
+background:rgba(0,0,0,.75);
+
+backdrop-filter:blur(10px);
+
+color:white;
+
+padding:25px;
+
+border-radius:20px;
+
+max-width:350px;
+
+line-height:1.8;
+
+}
+
+
+.hidden{
+
+display:none;
+
+}

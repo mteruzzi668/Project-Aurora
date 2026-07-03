@@ -226,25 +226,45 @@ function updateLightbox(){
 
     document.getElementById("photoTitle").textContent = photo.title;
 
-    document.getElementById("photoLocation").innerHTML = `
+   document.getElementById("photoLocation").innerHTML = `
 
-    📍 ${photo.subcategory}}<br><br>
+<button id="infoButton">
+ⓘ Photo info
+</button>
 
-    📷 ${photo.camera}<br>
+<div id="photoInfoPanel" class="hidden">
 
-    🔍 ${photo.lens}<br><br>
+📍 ${photo.location}<br><br>
 
-    ${photo.focalLength}
-    &nbsp;&nbsp;•&nbsp;&nbsp;
-    ${photo.aperture}
-    &nbsp;&nbsp;•&nbsp;&nbsp;
-    ${photo.shutter}
-    &nbsp;&nbsp;•&nbsp;&nbsp;
-    ISO ${photo.iso}<br><br>
+📷 ${photo.camera}<br>
 
-    📅 ${photo.date}
+🔍 ${photo.lens}<br><br>
+
+${photo.focalLength}
+ • 
+${photo.aperture}
+ • 
+${photo.shutter}
+ • 
+ISO ${photo.iso}
+
+<br><br>
+
+📅 ${photo.date}
+
+</div>
 
 `;
+
+document
+.getElementById("infoButton")
+.addEventListener("click",()=>{
+
+document
+.getElementById("photoInfoPanel")
+.classList.toggle("hidden");
+
+});
 
 }
 
