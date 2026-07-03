@@ -117,6 +117,21 @@ for file in PHOTO_DIR.rglob("*"):
 
     )
 
+
+    # ----------------------------------------------------------
+    # FIX CANON RF 100-500 ON CANON EOS R7
+    # ----------------------------------------------------------
+
+    lens_name = lens["name"]
+
+    if (
+        format_camera(exif) == "Canon EOS R7"
+        and lens_name == "Canon RF 50mm F1.2L USM or other Canon RF Lens"
+    ):
+
+        lens_name = "Canon RF 100-500mm F4.5-7.1L IS USM"
+
+
     photo = {
 
         "id": len(photos) + 1,
@@ -137,7 +152,7 @@ for file in PHOTO_DIR.rglob("*"):
 
         "camera": format_camera(exif),
 
-        "lens": lens["name"],
+        "lens": lens_name,
 
         "lensId": lens["id"],
 
