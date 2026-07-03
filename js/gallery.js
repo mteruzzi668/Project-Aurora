@@ -227,6 +227,15 @@ function updateLightbox(){
     document.getElementById("photoTitle").textContent = photo.title;
 
    document.getElementById("photoLocation").innerHTML = `
+`;
+
+document
+.querySelectorAll(".info-button,.info-panel")
+.forEach(e=>e.remove());
+
+document.querySelector(".lightboxImageWrapper").insertAdjacentHTML(
+"beforeend",
+`
 
 <button id="infoButton" class="info-button">
 ⓘ
@@ -234,17 +243,11 @@ function updateLightbox(){
 
 <div id="photoInfoPanel" class="info-panel">
 
-<p>
-📍 ${photo.location}
-</p>
+<p>📍 ${photo.location}</p>
 
-<p>
-📷 ${photo.camera}
-</p>
+<p>📷 ${photo.camera}</p>
 
-<p>
-🔍 ${photo.lens}
-</p>
+<p>🔍 ${photo.lens}</p>
 
 <p>
 <b>Settings</b><br>
@@ -254,13 +257,11 @@ ${photo.shutter}<br>
 ISO ${photo.iso}
 </p>
 
-<p>
-📅 ${photo.date}
-</p>
+<p>📅 ${photo.date}</p>
 
 </div>
 
-`;
+`);
 
 document
 .getElementById("infoButton")
