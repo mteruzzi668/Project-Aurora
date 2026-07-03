@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import subprocess
+from PIL import Image
 from exif_reader import get_exif
 from formatter import *
 from lens_database import get_lens
@@ -8,6 +9,8 @@ from lens_database import get_lens
 ROOT = Path(__file__).resolve().parent.parent
 
 PHOTO_DIR = ROOT / "photo"
+
+WEB_PHOTO_DIR = ROOT / "assets" / "photo"
 
 DATABASE_FILE = ROOT / "data" / "database.json"
 
@@ -60,6 +63,32 @@ def relative_path(path):
 
     return path.relative_to(ROOT).as_posix()
 
+def create_web_image(file):
+
+    relative = file.relative_to(PHOTO_DIR)
+
+    output = WEB_PHOTO_DIR / relative
+
+    output.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    img = Image.open(file)
+
+    img.thumbnail(
+        (2048, 2048)
+    )
+
+    img.save(
+        output,
+        "JPEG",
+        quality=85,
+        optimize=True
+    )
+
+    return output
+
 photos = []
 
 print("\n===================================")
@@ -80,6 +109,8 @@ for file in PHOTO_DIR.rglob("*"):
 
     exif = get_exif(file)
 
+    web_file = create_web_image(file)
+
     lens = get_lens(
 
     format_lens(exif)
@@ -94,7 +125,9 @@ for file in PHOTO_DIR.rglob("*"):
 
         "title": create_title(file),
 
-        "path": relative_path(file),
+        "path": relative_path(web_file),
+
+        "original": relative_path(file),
 
         "extension": file.suffix,
 

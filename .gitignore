@@ -1,0 +1,6 @@
+# Original full size photos
+/photo/
+
+# Python
+__pycache__/
+*.pyc
