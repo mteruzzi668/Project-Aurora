@@ -82,6 +82,18 @@ async function loadGallery(){
 
     console.log(photos);
 
+    const params = new URLSearchParams(window.location.search);
+
+    const category = params.get("category");
+
+    const filteredPhotos =
+        photos.filter(photo => photo.category === category);
+
+    buildHeader(category, filteredPhotos.length);
+
+    buildGallery(filteredPhotos);
+
+}
 /*==========================================================
 HEADER
 ==========================================================*/
