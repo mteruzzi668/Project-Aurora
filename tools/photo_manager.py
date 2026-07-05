@@ -3,7 +3,7 @@ import json
 import subprocess
 import re
 import os
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 from exif_reader import get_exif
 from formatter import *
 from lens_database import get_lens
@@ -237,6 +237,8 @@ def create_web_image(file):
 
     img = Image.open(file)
 
+    img = ImageOps.exif_transpose(img)
+    
     img.thumbnail(
         (2048, 2048)
     )

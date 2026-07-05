@@ -114,7 +114,11 @@ async function loadGallery(){
         .filter(photo =>
             photo.category === category
             &&
-            photo.private !== true
+            (
+                !photo.private
+                ||
+                privateMode
+            )
         )
         .sort((a,b)=>{
 
