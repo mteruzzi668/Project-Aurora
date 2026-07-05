@@ -110,10 +110,29 @@ async function loadGallery(){
     const category = params.get("category");
 
     const filteredPhotos =
-    photos.filter(photo =>
-        photo.category === category &&
-        (!photo.private || privateMode)
-    );
+    photos
+        .filter(photo =>
+            photo.category === category
+            &&
+            photo.private !== true
+        )
+        .sort((a,b)=>{
+
+            if(a.order !== null && b.order !== null){
+
+                return a.order - b.order;
+
+            }
+
+            if(a.title === b.title){
+
+                return a.sequence - b.sequence;
+
+            }
+
+            return a.title.localeCompare(b.title);
+
+        });
 
     buildHeader(category, filteredPhotos.length);
 
@@ -190,7 +209,12 @@ function buildGallery(list){
 
         const card=document.createElement("div");
 
-        card.className="photoCard";
+        card.className =
+        photo.panorama
+        ?
+        "photoCard panorama"
+        :
+        "photoCard";
 
         card.innerHTML=`
 

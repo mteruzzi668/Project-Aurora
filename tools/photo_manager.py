@@ -1,10 +1,101 @@
 from pathlib import Path
 import json
 import subprocess
+import re
+import os
 from PIL import Image, ImageDraw, ImageFont
 from exif_reader import get_exif
 from formatter import *
 from lens_database import get_lens
+
+# ==========================================================
+# FILE NAME PARSER
+# ==========================================================
+
+def parse_filename(filename):
+
+    name = os.path.splitext(filename)[0]
+
+
+    result = {
+        "title": "",
+        "order": None,
+        "sequence": None,
+        "panorama": False,
+        "private": False
+    }
+
+
+    parts = name.split("-")
+
+
+    # ------------------------------------
+    # FORMAT:
+    # 001-place_tag-001
+    # ------------------------------------
+
+    if len(parts) == 3 and parts[0].isdigit():
+
+        result["order"] = int(parts[0])
+
+        clean_name = parts[1]
+
+        result["sequence"] = int(parts[2])
+
+
+    # ------------------------------------
+    # FORMAT:
+    # subject_tag-001
+    # ------------------------------------
+
+    elif len(parts) == 2:
+
+        clean_name = parts[0]
+
+        if parts[1].isdigit():
+
+            result["sequence"] = int(parts[1])
+
+
+    else:
+
+        clean_name = name
+
+
+    # TAGS
+
+    if "_pano" in clean_name:
+
+        result["panorama"] = True
+
+        clean_name = clean_name.replace(
+            "_pano",
+            ""
+        )
+
+
+    if "_private" in clean_name:
+
+        result["private"] = True
+
+        clean_name = clean_name.replace(
+            "_private",
+            ""
+        )
+
+
+    # TITLE
+
+    clean_name = clean_name.replace(
+        "_",
+        " "
+    )
+
+
+    result["title"] = clean_name.title()
+
+
+    return result
 
 # ==========================================================
 # WATERMARK
@@ -204,42 +295,56 @@ for file in PHOTO_DIR.rglob("*"):
 
         lens_name = "Canon RF 100-500mm F4.5-7.1L IS USM"
 
+    info = parse_filename(file.name)
+
 
     photo = {
 
-        "id": len(photos) + 1,
+    "id": len(photos) + 1,
 
-        "filename": file.name,
+    "filename": file.name,
 
-        "title": create_title(file),
+    "title": info["title"],
 
-        "path": relative_path(web_file),
+    "path": relative_path(web_file),
 
-        "original": relative_path(file),
+    "original": relative_path(file),
 
-        "extension": file.suffix,
+    "extension": file.suffix,
 
-        "category": category,
+    "category": category,
 
-        "subcategory": subcategory,
+    "subcategory": subcategory,
 
-        "private": is_private,
 
-        "camera": format_camera(exif),
+    # NEW NAMING SYSTEM
 
-        "lens": lens_name,
+    "order": info["order"],
 
-        "lensId": lens["id"],
+    "sequence": info["sequence"],
 
-        "iso": format_iso(exif),
+    "panorama": info["panorama"],
 
-        "focalLength": format_focal(exif),
+    "private": info["private"],
 
-        "aperture": format_aperture(exif),
 
-        "shutter": format_shutter(exif),
+    # EXIF DATA
 
-        "date": format_date(exif),
+    "camera": format_camera(exif),
+
+    "lens": lens_name,
+
+    "lensId": lens["id"],
+
+    "iso": format_iso(exif),
+
+    "focalLength": format_focal(exif),
+
+    "aperture": format_aperture(exif),
+
+    "shutter": format_shutter(exif),
+
+    "date": format_date(exif),
 
     }
 
