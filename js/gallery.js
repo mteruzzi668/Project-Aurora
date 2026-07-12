@@ -21,37 +21,37 @@ const COLLECTIONS = {
 
         {
             name:"Birds",
-            image:"assets/collections/wildlife/birds.jpg"
+            image:"assets/collections/wildlife/birds.jpg",
             layout:"landscape"
         },
 
         {
             name:"Aquatic Life",
-            image:"assets/collections/wildlife/aquatic-life.jpg"
+            image:"assets/collections/wildlife/aquatic-life.jpg",
             layout:"landscape"
         },
 
         {
             name:"Reptiles & Amphibians",
-            image:"assets/collections/wildlife/reptiles-amphibians.jpg"
+            image:"assets/collections/wildlife/reptiles-amphibians.jpg",
             layout:"portrait"
         },
 
         {
             name:"Mammals",
-            image:"assets/collections/wildlife/mammals.jpg"
+            image:"assets/collections/wildlife/mammals.jpg",
             layout:"portrait"
         },
 
         {
             name:"Social Mammals",
-            image:"assets/collections/wildlife/social-mammals.jpg"
+            image:"assets/collections/wildlife/social-mammals.jpg",
             layout:"landscape"
         },
 
         {
             name:"Invertebrates",
-            image:"assets/collections/wildlife/invertebrates.jpg"
+            image:"assets/collections/wildlife/invertebrates.jpg",
             layout:"portrait"
         }
 
