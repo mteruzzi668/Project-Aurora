@@ -194,15 +194,16 @@
 
     overflow:hidden;
 
-    border-radius:var(--radius);
+    border-radius:18px;
 
-    text-decoration:none;
+    cursor:pointer;
 
-    height:480px;
+    min-height:260px;
 
-    background:#111;
+    transition:.35s;
 
 }
+
 .collection-card img{
 
     width:100%;
@@ -214,6 +215,28 @@
 
         transform .7s ease,
         filter .7s ease;
+
+}
+
+.collection-card.hero{
+
+    grid-column:span 2;
+
+    grid-row:span 2;
+
+    min-height:560px;
+
+}
+
+.collection-card.landscape{
+
+    min-height:240px;
+
+}
+
+.collection-card.portrait{
+
+    min-height:380px;
 
 }
 
@@ -1010,6 +1033,22 @@ MOBILE
         right:8px;
 
     }
+
+}
+
+.collection-card.hero{
+
+    grid-column:span 1;
+
+    grid-row:span 1;
+
+    min-height:320px;
+
+}
+
+.collection-card.portrait{
+
+    min-height:280px;
 
 }
 

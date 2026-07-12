@@ -15,37 +15,44 @@ const COLLECTIONS = {
 
         {
             name:"Big Cats",
-            image:"assets/collections/wildlife/big-cats.jpg"
+            image:"assets/collections/wildlife/big-cats.jpg",
+            layout:"hero"
         },
 
         {
             name:"Birds",
             image:"assets/collections/wildlife/birds.jpg"
+            layout:"landscape"
         },
 
         {
             name:"Aquatic Life",
             image:"assets/collections/wildlife/aquatic-life.jpg"
+            layout:"landscape"
         },
 
         {
             name:"Reptiles & Amphibians",
             image:"assets/collections/wildlife/reptiles-amphibians.jpg"
+            layout:"portrait"
         },
 
         {
             name:"Mammals",
             image:"assets/collections/wildlife/mammals.jpg"
+            layout:"portrait"
         },
 
         {
             name:"Social Mammals",
             image:"assets/collections/wildlife/social-mammals.jpg"
+            layout:"landscape"
         },
 
         {
             name:"Invertebrates",
             image:"assets/collections/wildlife/invertebrates.jpg"
+            layout:"portrait"
         }
 
     ]
@@ -550,7 +557,7 @@ function buildSubcategoryGrid(category){
             document.createElement("div");
 
         card.className =
-            "collection-card";
+            "collection-card " + group.layout;
 
         card.innerHTML=`
 
