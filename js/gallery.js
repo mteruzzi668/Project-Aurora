@@ -5,6 +5,53 @@ Gallery.js
 
 let photos = [];
 
+/*==========================================================
+COLLECTIONS
+==========================================================*/
+
+const COLLECTIONS = {
+
+    wildlife: [
+
+        {
+            name:"Big Cats",
+            image:"assets/collections/wildlife/big-cats.jpg"
+        },
+
+        {
+            name:"Birds",
+            image:"assets/collections/wildlife/birds.jpg"
+        },
+
+        {
+            name:"Aquatic Life",
+            image:"assets/collections/wildlife/aquatic-life.jpg"
+        },
+
+        {
+            name:"Reptiles & Amphibians",
+            image:"assets/collections/wildlife/reptiles-amphibians.jpg"
+        },
+
+        {
+            name:"Mammals",
+            image:"assets/collections/wildlife/mammals.jpg"
+        },
+
+        {
+            name:"Social Mammals",
+            image:"assets/collections/wildlife/social-mammals.jpg"
+        },
+
+        {
+            name:"Invertebrates",
+            image:"assets/collections/wildlife/invertebrates.jpg"
+        }
+
+    ]
+
+};
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* Se siamo nella pagina Portfolio */
@@ -476,12 +523,7 @@ function buildSubcategoryGrid(category){
     grid.innerHTML="";
 
     const groups =
-        [...new Set(
-            photos
-            .filter(p=>p.category===category)
-            .map(p=>p.subcategory)
-        )]
-        .sort();
+    COLLECTIONS[category];
 
     groups.forEach(group=>{
 
@@ -492,7 +534,7 @@ function buildSubcategoryGrid(category){
 
                 &&
 
-                p.subcategory===group
+                p.subcategory===group.name
 
                 &&
 
@@ -512,15 +554,19 @@ function buildSubcategoryGrid(category){
 
         card.innerHTML=`
 
-            <div class="collection-content">
+    <img
+        src="${group.image}"
+        alt="${group.name}">
 
-                <h2>${group}</h2>
+    <div class="collection-content">
 
-                <p>${total} photographs</p>
+        <h2>${group.name}</h2>
 
-            </div>
+        <p>${total} photographs</p>
 
-        `;
+    </div>
+
+`;
 
         card.addEventListener("click",()=>{
 
@@ -538,7 +584,7 @@ function buildSubcategoryGrid(category){
 
                 +
 
-                encodeURIComponent(group);
+                encodeURIComponent(group.name);
 
         });
 
