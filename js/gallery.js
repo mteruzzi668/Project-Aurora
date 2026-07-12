@@ -14,45 +14,39 @@ const COLLECTIONS = {
     wildlife: [
 
         {
-            name:"Big Cats",
-            image:"assets/collections/wildlife/big-cats.jpg",
-            layout:"hero"
-        },
-
-        {
             name:"Birds",
             image:"assets/collections/wildlife/birds.jpg",
-            layout:"landscape"
+            position:1
         },
-
         {
             name:"Aquatic Life",
             image:"assets/collections/wildlife/aquatic-life.jpg",
-            layout:"landscape"
+            position:2
         },
-
         {
             name:"Reptiles & Amphibians",
             image:"assets/collections/wildlife/reptiles-amphibians.jpg",
-            layout:"portrait"
+            position:3
         },
-
+        {
+            name:"Big Cats",
+            image:"assets/collections/wildlife/big-cats.jpg",
+            position:4
+        },
         {
             name:"Mammals",
             image:"assets/collections/wildlife/mammals.jpg",
-            layout:"portrait"
+            position:5
         },
-
         {
             name:"Social Mammals",
             image:"assets/collections/wildlife/social-mammals.jpg",
-            layout:"landscape"
+            position:6
         },
-
         {
             name:"Invertebrates",
             image:"assets/collections/wildlife/invertebrates.jpg",
-            layout:"portrait"
+            position:7
         }
 
     ]
@@ -532,6 +526,8 @@ function buildSubcategoryGrid(category){
     const groups =
     COLLECTIONS[category];
 
+    groups.sort((a,b)=>a.position-b.position);
+
     groups.forEach(group=>{
 
         const total =
@@ -556,8 +552,9 @@ function buildSubcategoryGrid(category){
         const card =
             document.createElement("div");
 
-        card.className =
-            "collection-card " + group.layout;
+        card.className="collection-card";
+
+        card.dataset.position=group.position;
 
         card.innerHTML=`
 
