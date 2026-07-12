@@ -5,8 +5,6 @@ Gallery.js
 
 let photos = [];
 
-let privateMode = false;
-
 document.addEventListener("DOMContentLoaded", () => {
 
     /* Se siamo nella pagina Portfolio */
@@ -24,27 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loadGallery();
 
     }
-    
-    const privateButton =
-    document.getElementById("privateMode");
-
-if(privateButton){
-
-    privateButton.addEventListener("click",()=>{
-
-        const password = prompt("Private password");
-
-        if(password === "Aurora"){
-
-            privateMode = true;
-
-            loadGallery();
-
-        }
-
-    });
-
-}
 
 });
 
@@ -117,7 +94,7 @@ async function loadGallery(){
             (
                 !photo.private
                 ||
-                privateMode
+                isPrivate()
             )
         )
         .sort((a,b)=>{

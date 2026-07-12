@@ -937,27 +937,35 @@ LIGHTBOX
 
     transform:translateY(-50%);
 
-    background:none;
+    width:56px;
+    height:56px;
 
-    border:none;
+    border-radius:50%;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(5px);
 
     color:white;
 
-    font-size:50px;
+    border:1px solid rgba(255,255,255,.3);
+
+    font-size:34px;
 
     cursor:pointer;
 
+    z-index:100;
 }
 
 #prevPhoto{
 
-    left:35px;
+    left:15px;
 
 }
 
 #nextPhoto{
 
-    right:35px;
+    right:15px;
 
 }
 
@@ -982,6 +990,26 @@ LIGHTBOX
 .lightboxInfo p{
 
     color:#bdbdbd;
+
+}
+
+/*==========================================================
+MOBILE
+==========================================================*/
+
+@media(max-width:700px){
+
+    #prevPhoto{
+
+        left:8px;
+
+    }
+
+    #nextPhoto{
+
+        right:8px;
+
+    }
 
 }
 

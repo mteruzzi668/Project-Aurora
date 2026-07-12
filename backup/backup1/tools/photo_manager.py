@@ -1,0 +1,378 @@
+from pathlib import Path
+import json
+import subprocess
+import re
+import os
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+from exif_reader import get_exif
+from formatter import *
+from lens_database import get_lens
+
+# ==========================================================
+# FILE NAME PARSER
+# ==========================================================
+
+def parse_filename(filename):
+
+    name = os.path.splitext(filename)[0]
+
+
+    result = {
+        "title": "",
+        "order": None,
+        "sequence": None,
+        "panorama": False,
+        "private": False
+    }
+
+
+    parts = name.split("-")
+
+
+    # ------------------------------------
+    # FORMAT:
+    # 001-place_tag-001
+    # ------------------------------------
+
+    if len(parts) == 3 and parts[0].isdigit():
+
+        result["order"] = int(parts[0])
+
+        clean_name = parts[1]
+
+        result["sequence"] = int(parts[2])
+
+
+    # ------------------------------------
+    # FORMAT:
+    # subject_tag-001
+    # ------------------------------------
+
+    elif len(parts) == 2:
+
+        clean_name = parts[0]
+
+        if parts[1].isdigit():
+
+            result["sequence"] = int(parts[1])
+
+
+    else:
+
+        clean_name = name
+
+
+    # TAGS
+
+    if "_pano" in clean_name:
+
+        result["panorama"] = True
+
+        clean_name = clean_name.replace(
+            "_pano",
+            ""
+        )
+
+
+    if "_private" in clean_name:
+
+        result["private"] = True
+
+        clean_name = clean_name.replace(
+            "_private",
+            ""
+        )
+
+
+    # TITLE
+
+    clean_name = clean_name.replace(
+        "_",
+        " "
+    )
+
+
+    result["title"] = clean_name.title()
+
+
+    return result
+
+# ==========================================================
+# WATERMARK
+# ==========================================================
+
+def add_watermark(img):
+
+    watermark = "© Marco Teruzzi"
+
+    img = img.convert("RGBA")
+
+    layer = Image.new(
+        "RGBA",
+        img.size,
+        (255,255,255,0)
+    )
+
+    draw = ImageDraw.Draw(layer)
+
+
+    # grandezza proporzionale alla foto
+    font_size = int(img.size[0] * 0.025)
+
+    try:
+        font = ImageFont.truetype(
+            "arial.ttf",
+            font_size
+        )
+    except:
+        font = ImageFont.load_default()
+
+
+    bbox = draw.textbbox(
+        (0,0),
+        watermark,
+        font=font
+    )
+
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+
+
+    margin = int(img.size[0] * 0.03)
+
+
+    position = (
+        img.size[0] - text_width - margin,
+        img.size[1] - text_height - margin
+    )
+
+
+    draw.text(
+        position,
+        watermark,
+        font=font,
+        fill=(255,255,255,120)
+    )
+
+
+    combined = Image.alpha_composite(
+        img,
+        layer
+    )
+
+    return combined.convert("RGB")
+
+# ==========================================================
+# START
+# ==========================================================
+
+ROOT = Path(__file__).resolve().parent.parent
+
+PHOTO_DIR = ROOT / "photo"
+
+WEB_PHOTO_DIR = ROOT / "assets" / "photo"
+
+DATABASE_FILE = ROOT / "data" / "database.json"
+
+EXIFTOOL = ROOT / "tools" / "exiftool" / "exiftool.exe"
+
+VALID_EXTENSIONS = {
+    ".jpg",
+    ".jpeg",
+    ".JPG",
+    ".JPEG"
+}
+
+
+def create_title(filename):
+
+    name = filename.stem
+    name = name.replace("_private", "")
+
+    name = name.replace("-", " ")
+
+    name = name.replace("_", " ")
+
+    words = []
+
+    for word in name.split():
+
+        words.append(word.capitalize())
+
+    return " ".join(words)
+
+
+def category_from_path(path):
+
+    parts = path.parts
+
+    category = ""
+
+    subcategory = ""
+
+    if len(parts) >= 1:
+
+        category = parts[0]
+
+    if len(parts) >= 2:
+
+        subcategory = parts[1]
+
+    return category, subcategory
+
+def relative_path(path):
+
+    return path.relative_to(ROOT).as_posix()
+
+def create_web_image(file):
+
+    relative = file.relative_to(PHOTO_DIR)
+
+    output = WEB_PHOTO_DIR / relative
+
+    output.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    img = Image.open(file)
+
+    img = ImageOps.exif_transpose(img)
+    
+    img.thumbnail(
+        (2048, 2048)
+    )
+    
+    img = add_watermark(img)
+
+    img.save(
+        output,
+        "JPEG",
+        quality=85,
+        optimize=True
+    )
+
+    return output
+
+photos = []
+
+print("\n===================================")
+print("   PROJECT AURORA PHOTO MANAGER")
+print("===================================\n")
+
+for file in PHOTO_DIR.rglob("*"):
+
+    if not file.is_file():
+        continue
+
+    if file.suffix not in VALID_EXTENSIONS:
+        continue
+
+    category, subcategory = category_from_path(
+        file.relative_to(PHOTO_DIR)
+    )
+    is_private = "_private" in file.stem.lower()
+
+    exif = get_exif(file)
+
+    web_file = create_web_image(file)
+
+    lens = get_lens(
+
+    format_lens(exif)
+
+    )
+
+
+    # ----------------------------------------------------------
+    # FIX CANON RF 100-500 ON CANON EOS R7
+    # ----------------------------------------------------------
+
+    lens_name = lens["name"]
+
+    if (
+        format_camera(exif) == "Canon EOS R7"
+        and lens_name == "Canon RF 50mm F1.2L USM or other Canon RF Lens"
+    ):
+
+        lens_name = "Canon RF 100-500mm F4.5-7.1L IS USM"
+
+    info = parse_filename(file.name)
+
+
+    photo = {
+
+    "id": len(photos) + 1,
+
+    "filename": file.name,
+
+    "title": info["title"],
+
+    "path": relative_path(web_file),
+
+    "original": relative_path(file),
+
+    "extension": file.suffix,
+
+    "category": category,
+
+    "subcategory": subcategory,
+
+
+    # NEW NAMING SYSTEM
+
+    "order": info["order"],
+
+    "sequence": info["sequence"],
+
+    "panorama": info["panorama"],
+
+    "private": info["private"],
+
+
+    # EXIF DATA
+
+    "camera": format_camera(exif),
+
+    "lens": lens_name,
+
+    "lensId": lens["id"],
+
+    "iso": format_iso(exif),
+
+    "focalLength": format_focal(exif),
+
+    "aperture": format_aperture(exif),
+
+    "shutter": format_shutter(exif),
+
+    "date": format_date(exif),
+
+    }
+
+    photos.append(photo)
+
+photos.sort(key=lambda p: p["path"])
+
+for index, photo in enumerate(photos, start=1):
+
+    photo["id"] = index
+
+DATABASE_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+with open(DATABASE_FILE, "w", encoding="utf-8") as f:
+
+    json.dump(
+        photos,
+        f,
+        indent=4,
+        ensure_ascii=False
+    )
+
+print(f"Photos found : {len(photos)}")
+
+print(f"Database     : {DATABASE_FILE}")
+
+print("\nDone.\n")
+
+input("Press ENTER to close...")
