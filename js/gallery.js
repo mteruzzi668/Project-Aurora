@@ -86,40 +86,70 @@ async function loadGallery(){
 
     const category = params.get("category");
 
+    const subcategory = params.get("subcategory");
+
     const filteredPhotos =
     photos
-        .filter(photo =>
-            photo.category === category
-            &&
-            (
-                !photo.private
-                ||
-                isPrivate()
-            )
-        )
-        .sort((a,b)=>{
+    .filter(photo =>
 
-            if(a.order !== null && b.order !== null){
+    photo.category === category
 
-                return a.order - b.order;
+    &&
 
-            }
+    (
+        !subcategory
+        ||
+        photo.subcategory===subcategory
+    )
 
-            if(a.title === b.title){
+    &&
 
-                return a.sequence - b.sequence;
+    (
+        !photo.private
+        ||
+        isPrivate()
+    )
 
-            }
+    )
 
-            return a.title.localeCompare(b.title);
+    .sort((a,b)=>{
 
-        });
+        if(a.order !== null && b.order !== null){
+
+            return a.order - b.order;
+
+        }
+
+        if(a.title === b.title){
+
+            return a.sequence - b.sequence;
+
+        }
+
+        return a.title.localeCompare(b.title);
+
+    });
+
+
+    if(
+    (category==="wildlife" || category==="travel")
+    &&
+    !subcategory
+){
+
+    buildSubcategoryGrid(category);
+
+}
+else{
 
     buildHeader(category, filteredPhotos.length);
 
     buildGallery(filteredPhotos);
 
 }
+
+}
+
 /*==========================================================
 HEADER
 ==========================================================*/
@@ -410,6 +440,109 @@ if(lightbox){
             lightbox.classList.add("hidden");
 
         }
+
+    });
+
+}
+
+/*==========================================================
+SUBCATEGORY GRID
+==========================================================*/
+
+function buildSubcategoryGrid(category){
+
+    const title =
+        document.getElementById("galleryTitle");
+
+    const description =
+        document.getElementById("galleryDescription");
+
+    const breadcrumb =
+        document.getElementById("breadcrumbCategory");
+
+    title.textContent =
+        category.charAt(0).toUpperCase() +
+        category.slice(1);
+
+    breadcrumb.textContent =
+        title.textContent;
+
+    description.textContent =
+        "Select a collection";
+
+    const grid =
+        document.getElementById("photoGrid");
+
+    grid.innerHTML="";
+
+    const groups =
+        [...new Set(
+            photos
+            .filter(p=>p.category===category)
+            .map(p=>p.subcategory)
+        )]
+        .sort();
+
+    groups.forEach(group=>{
+
+        const total =
+            photos.filter(p=>
+
+                p.category===category
+
+                &&
+
+                p.subcategory===group
+
+                &&
+
+                (
+                    !p.private
+                    ||
+                    isPrivate()
+                )
+
+            ).length;
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "collection-card";
+
+        card.innerHTML=`
+
+            <div class="collection-content">
+
+                <h2>${group}</h2>
+
+                <p>${total} photographs</p>
+
+            </div>
+
+        `;
+
+        card.addEventListener("click",()=>{
+
+            window.location.href=
+
+                "gallery.html?category="
+
+                +
+
+                category
+
+                +
+
+                "&subcategory="
+
+                +
+
+                encodeURIComponent(group);
+
+        });
+
+        grid.appendChild(card);
 
     });
 

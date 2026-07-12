@@ -1225,3 +1225,47 @@ PANORAMA
     }
 
 }
+
+.collection-card{
+
+    background:#1A1D23;
+
+    border-radius:18px;
+
+    min-height:220px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.collection-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.collection-content{
+
+    text-align:center;
+
+}
+
+.collection-content h2{
+
+    margin-bottom:15px;
+
+}
+
+.collection-content p{
+
+    color:#A5ADB5;
+
+}
