@@ -315,6 +315,7 @@ function openLightbox(photo){
 
     currentGallery = photos.filter(p =>
     p.category === photo.category &&
+    p.subcategory === photo.subcategory &&
     (!p.private || isPrivate())
     );
 
