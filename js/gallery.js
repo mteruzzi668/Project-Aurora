@@ -284,6 +284,10 @@ function buildGallery(list){
 
             <div class="photoOverlay">
 
+            </div>
+
+            <div class="photoCaption">
+
                 <h3>${photo.title}</h3>
 
                 <span>${photo.subcategory}</span>
@@ -524,12 +528,57 @@ function buildSubcategoryGrid(category){
 
     grid.innerHTML="";
 
-    const groups =
-    COLLECTIONS[category];
+    let groups = COLLECTIONS[category];
 
-    groups.sort((a,b)=>a.position-b.position);
+if(!groups){
 
-    groups.forEach(group=>{
+    const subcategories = [...new Set(
+
+        photos
+        .filter(p =>
+            p.category === category &&
+            (!p.private || isPrivate())
+        )
+        .map(p => p.subcategory)
+
+    )];
+
+    groups = subcategories.map((name,index)=>({
+
+        name:name,
+
+        image:
+            photos.find(p =>
+                p.category === category &&
+                p.subcategory === name
+            )?.path || "",
+
+        position:index + 1
+
+    }));
+
+}
+
+groups = groups.filter(group => {
+
+    const albumPhotos = photos.filter(p =>
+
+        p.category === category &&
+        p.subcategory === group.name
+
+    );
+
+    const hasPrivatePhotos =
+        albumPhotos.length > 0 &&
+        albumPhotos.every(p => p.private);
+
+    return !hasPrivatePhotos || isPrivate();
+
+});
+
+groups.sort((a,b)=>a.position-b.position);
+
+groups.forEach(group=>{
 
         const total =
             photos.filter(p=>

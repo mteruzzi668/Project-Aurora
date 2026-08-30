@@ -798,15 +798,9 @@ PHOTO GRID
 
     position:relative;
 
-    overflow:hidden;
-
-    border-radius:18px;
-
     cursor:pointer;
 
-    aspect-ratio:4/3;
-
-    background:#1b1b1b;
+    background:transparent;
 
 }
 
@@ -814,9 +808,13 @@ PHOTO GRID
 
     width:100%;
 
-    height:100%;
+    height:auto;
+
+    display:block;
 
     object-fit:cover;
+
+    border-radius:18px;
 
     transition:.45s;
 
@@ -836,17 +834,13 @@ PHOTO GRID
 
     display:flex;
 
-    flex-direction:column;
+    align-items:flex-end;
 
-    justify-content:flex-end;
+    justify-content:center;
 
-    padding:24px;
+    padding:20px;
 
-    background:linear-gradient(transparent,rgba(0,0,0,.85));
-
-    opacity:0;
-
-    transition:.35s;
+    pointer-events:none;
 
 }
 
@@ -869,6 +863,32 @@ PHOTO GRID
 .photoOverlay span{
 
     color:#d0d0d0;
+
+}
+
+.photoCaption{
+
+    padding:14px 4px 5px;
+
+}
+
+.photoCaption h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:1.5rem;
+
+    margin:0 0 4px;
+
+    color:white;
+
+}
+
+.photoCaption span{
+
+    color:#8f969f;
+
+    font-size:.85rem;
 
 }
 /*==========================================================

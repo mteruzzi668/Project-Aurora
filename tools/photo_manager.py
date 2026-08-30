@@ -209,6 +209,8 @@ def category_from_path(path):
     category = ""
 
     subcategory = ""
+    
+    private = False
 
     if len(parts) >= 1:
 
@@ -218,7 +220,13 @@ def category_from_path(path):
 
         subcategory = parts[1]
 
-    return category, subcategory
+        if subcategory.lower().endswith("_private"):
+
+            private = True
+
+            subcategory = subcategory[:-8]
+
+    return category, subcategory, private
 
 def relative_path(path):
 
@@ -268,9 +276,9 @@ for file in PHOTO_DIR.rglob("*"):
     if file.suffix not in VALID_EXTENSIONS:
         continue
 
-    category, subcategory = category_from_path(
-        file.relative_to(PHOTO_DIR)
-    )
+    category, subcategory, folder_private = category_from_path(
+    	file.relative_to(PHOTO_DIR)
+	)
     is_private = "_private" in file.stem.lower()
 
     exif = get_exif(file)
@@ -327,7 +335,7 @@ for file in PHOTO_DIR.rglob("*"):
 
     "panorama": info["panorama"],
 
-    "private": info["private"],
+    "private": info["private"] or folder_private,
 
 
     # EXIF DATA
