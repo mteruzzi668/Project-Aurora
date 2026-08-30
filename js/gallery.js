@@ -268,6 +268,8 @@ function buildGallery(list){
 
         const card=document.createElement("div");
 
+        card.dataset.photoId = photo.id;
+
         card.className =
         photo.panorama
         ?
@@ -317,15 +319,23 @@ let currentIndex = 0;
 
 function openLightbox(photo){
 
-    currentGallery = photos.filter(p =>
-    p.category === photo.category &&
-    p.subcategory === photo.subcategory &&
-    (!p.private || isPrivate())
-    );
+    currentGallery = Array.from(
+        document.querySelectorAll(".photoCard")
+    ).map(card => {
 
-    currentIndex = currentGallery.findIndex(p => p.id === photo.id);
+        const id = Number(card.dataset.photoId);
 
-    const lightbox = document.getElementById("lightbox");
+        return photos.find(p => p.id === id);
+
+    }).filter(Boolean);
+
+    currentIndex =
+        currentGallery.findIndex(
+            p => p.id === photo.id
+        );
+
+    const lightbox =
+        document.getElementById("lightbox");
 
     lightbox.classList.remove("hidden");
 
